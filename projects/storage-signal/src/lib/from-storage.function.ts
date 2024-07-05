@@ -15,6 +15,7 @@ export const fromStorage = <TValue>(storageKey: string): WritableSignal<TValue |
   });
 
   const storageEventListener = (event: StorageEvent) => {
+    // storageArea should also be checked to avoid issue
     const isWatchedValueTargeted = event.key === storageKey;
     if (!isWatchedValueTargeted) {
       return;
@@ -23,7 +24,8 @@ export const fromStorage = <TValue>(storageKey: string): WritableSignal<TValue |
     const currentValue = fromStorageSignal();
     const newValue = storage.getItem<TValue>(storageKey);
 
-    const hasValueChanged = newValue !== currentValue;
+    // if value type is not string but object it is failing here
+    const hasValueChanged = JSON.stringify(newValue) !== JSON.stringify(currentValue);
     if (hasValueChanged) {
       fromStorageSignal.set(newValue);
     };

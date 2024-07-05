@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { fromStorage } from '../../../storage-signal/src/lib/from-storage.function';
+// import { fromStorage } from '../../../storage-signal/src/lib/from-storage.function';
 import { JsonPipe } from '@angular/common';
+// import { toSignal } from '@angular/core/rxjs-interop';
+import { fromStorageTansu as fromStorage } from '../../../storage-signal/src/lib/from-storage-tansu.function';
 
 type ColorScheme = 'light' | 'dark';
 
